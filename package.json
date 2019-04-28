@@ -2,14 +2,17 @@
   "name": "task-manager",
   "version": "1.0.0",
   "description": "This is a Task Manager Application that later would become an API Server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev-start": "nodemon"
   },
   "author": "Ravi Veliyat",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.11"
   }
 }

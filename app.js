@@ -1,21 +1,17 @@
 const express = require('express');
 const path = require('path');
+const taskRoutes = require('./routes/tasks');
 
 const app = express();
 
-let tasks = require('./data/tasks');
+app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '/public/index.html'));
+    res.redirect('/tasks/list');
 });
 
-app.get('/tasks', function (req, res) {
-    res.json(tasks);
-});
+app.use('/tasks', taskRoutes);
 
-app.get('/get-random-task', function (req, res) {
-    const randomTask = tasks[Math.floor(Math.random() * tasks.length) + 1];
-    res.send(randomTask);
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 module.exports = app;
