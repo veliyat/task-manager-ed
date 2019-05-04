@@ -6,7 +6,8 @@
             <% for(const task of tasks) { %>
             <li class="list-group-item">
                 <%=task.title%>
-                <a href="/tasks/details/<%=task.id%>" class="btn btn-info float-right">Details</a>
+                <a href="/tasks/<%=task.id%>/details" class="btn btn-info float-right">Details</a>
+                <a href="/tasks/<%=task.id%>/delete" class="btn btn-danger float-right">Delete</a>
             </li>
             <% } %>
         </ul>
