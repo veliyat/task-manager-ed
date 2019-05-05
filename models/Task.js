@@ -1,12 +1,14 @@
-class Task {
-    constructor(id, title, desc, url) {
-        this.id = id;
-        this.title = title;
-        this.description = desc;
-        this.resourceURL = url;
-        this.completed = false;
-        this.date = new Date();
-    }
-}
+const mongoose = require('mongoose');
+
+const TaskSchema = new mongoose.Schema({
+    title: String,
+    description: String,
+    completed: Boolean,
+    resourceURL: String
+}, {
+        timestamps: true
+    });
+
+const Task = mongoose.model('Task', TaskSchema);
 
 module.exports = Task;

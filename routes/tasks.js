@@ -3,6 +3,10 @@ const tasksController = require('../controllers/tasksController');
 
 const router = express.Router();
 
+router.get('/', function (req, res) {
+    res.redirect('/tasks/list');
+})
+
 router.get('/list', tasksController.getTasks);
 
 router.get('/add', tasksController.addTaskForm);
