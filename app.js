@@ -29,14 +29,6 @@ app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
 
-// app.use(function (req, res, next) {
-//     if (req.session.user) {
-//         next();
-//     } else {
-//         res.redirect('/');
-//     }
-// });
-
 app.get('/', function (req, res) {
     if (req.session.user) {
         res.redirect('/tasks');
@@ -47,6 +39,14 @@ app.get('/', function (req, res) {
 
 app.use('/', authRoutes);
 app.use('/tasks', [authMiddleware, taskRoutes]);
+
+app.use('**', (req, res) => {
+  res.render('shared/page-not-found', {
+    projectName: 'Task Manager',
+    title: '404 - Page Not Found',
+    user: req.session.user
+  });
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 

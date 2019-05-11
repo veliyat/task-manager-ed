@@ -1,7 +1,7 @@
 <% include ../shared/header %>
 
 <div class="row">
-    <div class="col col-md-4">
+    <div class="col col-md-8">
         <form action="/tasks/add" method="post" novalidate>
             <div class="form-group">
                 <label for="title">Title*</label>
@@ -24,5 +24,16 @@
         </form>
     </div>
 </div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#description' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
 
 <% include ../shared/footer %>

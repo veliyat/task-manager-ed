@@ -2,6 +2,10 @@
 
 <div class="row">
     <div class="col col-md-4">
+        <% if(!tasks.length) { %>
+        <div class="alert alert-info">No Tasks to Show.</div>
+        <% } %>
+
         <ul class="list-group">
             <% for(const task of tasks) { %>
             <li class="list-group-item">

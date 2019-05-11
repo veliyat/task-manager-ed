@@ -1,8 +1,8 @@
+const chalk = require('chalk');
 const Task = require('../models/Task');
 
 exports.getTasks = function (req, res) {
-    const user = req.session.user;
-
+    const user = req.session.user;    
     Task.find().then(function (tasks) {
         res.render('tasks/list', {
             projectName: 'Task Manager',
@@ -46,16 +46,14 @@ exports.addTask = function (req, res) {
 
     if (valid) {
         req.session.errors = {};
-        const newTask = new Task(
-            tasks.length + 1,
-            data.title,
-            data.description,
-            data.resourceURL
-        );
+        
+        data.completed = false;
 
-        tasks.push(newTask);
+        Task.insertMany([data]).then((task) => {
+          console.log(chalk.blue(task._id + ' Added!'));
+          res.redirect('/tasks');
+        }).catch((err) => console.log(err));
 
-        res.redirect('/');
     } else {
         req.session.errors = errors;
         res.redirect('/tasks/add');
@@ -77,12 +75,12 @@ exports.getTaskDetails = function (req, res) {
 }
 
 exports.deleteTask = function (req, res) {
-    const id = Number(req.params.id);
+    const id = req.params.id;
 
-    tasks.forEach((task, i) => {
-        if (id === task.id) {
-            tasks.splice(i, 1);
-            res.redirect('/');
-        }
-    });
+    Task.findByIdAndDelete(id)
+      .then((data) => {
+        console.log(chalk.blue(data._id + ' Deleted!'));
+        res.redirect('/tasks');
+      })
+      .catch(err => console.log(err));
 }
